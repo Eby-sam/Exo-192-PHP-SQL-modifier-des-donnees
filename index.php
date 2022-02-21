@@ -8,11 +8,29 @@
  * 6. Modifiez cet utilisateur directement après avoir envoyé les données ( on imagine que vous vous êtes trompé )
  */
 
+
+$server = 'localhost';
+$db = 'bdd_cours';
+$user = 'root';
+$pass = '';
 // TODO Votre code ici.
 try {
-    ...
+
+    $pdo = new PDO("mysql:host=$server;dbname=$db;charset=utf8mb4", $user,$pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Nous sommes connectés à la base de donnés.";
+
+    $requestU = "
+       INSERT INTO user (nom ,firstname ,mail, password)
+       VALUES('coquelet','samuel', 'coquelet.samuel@gmail.com','Naruto1990');
+   ";
+    $pdo->exec($requestU);
+
 }
-catch...
+catch(PDOException $exception) {
+    echo $exception->getMessage();
+}
+
 
 
 
